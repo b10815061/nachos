@@ -133,7 +133,7 @@ void PrintInt(int number);	//my System Call
 
 int OSAdd(int op1,int op2);
 
-void Log(char a);
+void log(char a);
 #endif /* IN_ASM */
 
 #endif /* SYSCALL_H */

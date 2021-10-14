@@ -55,8 +55,7 @@ ExceptionHandler(ExceptionType which)
 	int	val;
 	int 	op1,op2;
 	static	int	offset=0;
-	static bool firstMet=1;
-	FileSystem a = new FileSystem;	
+	static bool firstMet=1;	
     switch (which) {
 	case SyscallException:
 	    switch(type) {
@@ -105,10 +104,10 @@ ExceptionHandler(ExceptionType which)
 			char lowwer = 'a'+val;
 			char upper ='A'+val;
 			if(firstMet){
-				if(a.Open("NachOS.log")!=NULL){
-					a.Remove("NachOS.log");
+				if(kernel->fileSystem->Open("NachOS.log")!=NULL){
+					kernel->fileSystem->Remove("NachOS.log");
 				}
-				a.Create("NachOS.log");
+				kernel->fileSystem->Create("NachOS.log");
 				
 				
 				cout <<"*****MY MAGIC NUMBER IS:"<< val << endl;
@@ -117,7 +116,7 @@ ExceptionHandler(ExceptionType which)
 				
 				firstMet=0;	
 			}
-			OpenFile *opened = a.Open("NachOS.log");
+			OpenFile *opened = kernel->fileSystem->Open("NachOS.log");
 			cout <<"ascii of input is: "<< kernel->machine->ReadRegister(4)<<"(which is:"<<(char)kernel->machine->ReadRegister(4)<<")" << endl;
 			offset = offset+opened->WriteAt("[B10815061_Log]",15,offset);
 			//cout << "offset after writing [b10815061_Log] is : " << offset << endl;
